@@ -1,9 +1,14 @@
+using ApiConfitec.Core.IRepositorios;
+using ApiConfitec.Core.Services;
 using ApiConfitec.Infraestrutura;
+using ApiConfitec.Infraestrutura.Repositorios;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<UsuarioService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
