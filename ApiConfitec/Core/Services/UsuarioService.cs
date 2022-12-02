@@ -14,7 +14,14 @@ namespace ApiConfitec.Core.Services
 
         public async Task<List<Usuario>> GetAll()
         {
-            return await _repositorio.GetAll();
+            var list = await _repositorio.GetAll();
+            if (!list.Any())
+            {
+                return new List<Usuario>();
+            }else
+            {
+                return list;
+            }
         }
 
         public async Task<Usuario> Get(int id)
@@ -24,6 +31,16 @@ namespace ApiConfitec.Core.Services
 
         public async Task Create(Usuario usu)
         {
+            if(usu.DataNascimento >= DateTime.Now)
+            {
+                throw new Exception("Data invalida");
+            }
+
+            if(!usu.Email.Contains("@"))
+            {
+                throw new Exception("Email invalido");
+            }
+
             await _repositorio.Create(usu);
         }
 
