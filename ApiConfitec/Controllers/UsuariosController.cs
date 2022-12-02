@@ -1,4 +1,5 @@
-﻿using ApiConfitec.Core.Entidades;
+﻿using ApiConfitec.Core.DTO;
+using ApiConfitec.Core.Entidades;
 using ApiConfitec.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,11 @@ namespace ApiConfitec.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetAll()
+        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> GetAll()
         {
             try
             {
-                List<Usuario> usuarios = await _service.GetAll();
+                List<UsuarioDTO> usuarios = await _service.GetAll();
                 return Ok(usuarios);
             }
             catch (Exception ex)
@@ -31,11 +32,11 @@ namespace ApiConfitec.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> Get(int id)
+        public async Task<ActionResult<UsuarioDTO>> Get(int id)
         {
             try
             {
-                Usuario usu = await _service.Get(id);
+                UsuarioDTO usu = await _service.Get(id);
                 return Ok(usu);
             }
             catch (Exception ex)
@@ -45,11 +46,11 @@ namespace ApiConfitec.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create([FromBody] Usuario usuario)
         {
             try
             {
-                await _service.Create(new Usuario());
+                await _service.Create(usuario);
                 return Ok();
             }
             catch (Exception ex)

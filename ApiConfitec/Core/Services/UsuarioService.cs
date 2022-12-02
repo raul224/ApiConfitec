@@ -1,4 +1,5 @@
-﻿using ApiConfitec.Core.Entidades;
+﻿using ApiConfitec.Core.DTO;
+using ApiConfitec.Core.Entidades;
 using ApiConfitec.Core.IRepositorios;
 
 namespace ApiConfitec.Core.Services
@@ -12,19 +13,19 @@ namespace ApiConfitec.Core.Services
             _repositorio = repositorio;
         }
 
-        public async Task<List<Usuario>> GetAll()
+        public async Task<List<UsuarioDTO>> GetAll()
         {
             var list = await _repositorio.GetAll();
             if (!list.Any())
             {
-                return new List<Usuario>();
+                return new List<UsuarioDTO>();
             }else
             {
                 return list;
             }
         }
 
-        public async Task<Usuario> Get(int id)
+        public async Task<UsuarioDTO> Get(int id)
         {
             return await _repositorio.Get(id);
         }
