@@ -1,4 +1,5 @@
-﻿using ApiConfitec.Core.DTO;
+﻿using System.ComponentModel.DataAnnotations;
+using ApiConfitec.Core.DTO;
 using ApiConfitec.Core.Entidades;
 using ApiConfitec.Core.IRepositorios;
 
@@ -37,7 +38,7 @@ namespace ApiConfitec.Core.Services
                 throw new Exception("Data invalida");
             }
 
-            if(!usu.Email.Contains("@"))
+            if(!new EmailAddressAttribute().IsValid(usu.Email))
             {
                 throw new Exception("Email invalido");
             }
